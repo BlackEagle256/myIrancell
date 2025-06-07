@@ -1,3 +1,6 @@
+@import "reset.css";
+@import "custom-font.css";
+
 :root {
     --white-50: #ffffff;
     --white-100: #f6f6f6;
@@ -32,22 +35,22 @@ body,
 
 /* Utility Class */
 
-.flex{
+.flex {
     display: flex;
 }
 
-.justify-content-center{
+.justify-content-center {
     justify-content: center;
 }
 
-.align-items-center{
+.align-items-center {
     align-items: center;
 }
 
-.justify-content-between{
+.justify-content-between {
     justify-content: space-between;
 }
 
-.flex-column{
+.flex-column {
     flex-direction: column;
 }
