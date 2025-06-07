@@ -1,0 +1,31 @@
+:root {
+    --white-50: #ffffff;
+    --white-100: #f6f6f6;
+    --white-200: #e7e7e7;
+
+    --gold-50: #fffcef;
+    --gold-400: #fdc816;
+
+    --grey-650: #818181;
+    --grey-600: #707070;
+    --grey-700: #626161;
+}
+
+body,
+* {
+    font-family: Vazir;
+}
+
+.vazir-fb {
+    font-family: Vazir;
+    font-weight: bolder;
+}
+
+.vazir-fl {
+    font-family: Vazir;
+    font-weight: lighter;
+}
+
+.lalezar-font {
+    font-family: Lalezar;
+}
