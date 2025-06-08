@@ -123,14 +123,14 @@ body {
     color: var(--gold-400);
 }
 
-.active-service-box-desc{
+.active-service-box-desc {
     line-height: 30px;
 }
 
-.download-app-box{
+.download-app-box {
     position: relative;
     width: 100%;
-    top:100%;
+    top: 100%;
     transform: translateY(-610px);
     background-color: var(--white-50);
     border-radius: 15px;
@@ -138,12 +138,12 @@ body {
     padding: 20px;
 }
 
-.download-app-box img{
+.download-app-box img {
     width: 50px;
     image-rendering: pixelated;
 }
 
-.download-app-box h1{
+.download-app-box h1 {
     font-size: 1.2rem;
 }
 
