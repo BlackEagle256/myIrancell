@@ -64,8 +64,6 @@ body {
     text-align: center;
 }
 
-/* Start Progress */
-
 .charge-btn {
     background-color: var(--gold-400);
     width: 150px;
@@ -104,6 +102,49 @@ body {
     margin: 25px 0;
 }
 
-/* Finish Progress */
+.service-title {
+    margin-top: 35px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.active-service-box {
+    column-gap: 12px;
+    color: var(--grey-600);
+    margin-bottom: 30px;
+}
+
+.active-sevice-icon {
+    font-size: 1.4rem;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(253, 200, 23, 0.2);
+    border-radius: 12px;
+    color: var(--gold-400);
+}
+
+.active-service-box-desc{
+    line-height: 30px;
+}
+
+.download-app-box{
+    position: relative;
+    width: 100%;
+    top:100%;
+    transform: translateY(-610px);
+    background-color: var(--white-50);
+    border-radius: 15px;
+    flex-direction: row-reverse;
+    padding: 20px;
+}
+
+.download-app-box img{
+    width: 50px;
+    image-rendering: pixelated;
+}
+
+.download-app-box h1{
+    font-size: 1.2rem;
+}
 
 /* Finish Coding Left Side */
