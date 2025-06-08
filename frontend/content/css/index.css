@@ -75,6 +75,33 @@ body {
     box-shadow: 0 0 8px var(--gold-400);
     outline: none;
     border: none;
+    cursor: pointer;
+}
+
+.progress-10 {
+    background-image: -webkit-linear-gradient(360deg, #e4ebec 50%, transparent 50%),
+        -webkit-linear-gradient(right, var(--gold-400) 50%, #e4ebec 50%);
+}
+
+.charge-progress .overlay {
+    border-radius: 50%;
+    width: 85%;
+    height: 85%;
+    margin: auto;
+    background-color: var(--gold-50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00a3ff;
+}
+
+.charge-progress {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    background-color: var(--gold-50);
+    margin: 25px 0;
 }
 
 /* Finish Progress */
