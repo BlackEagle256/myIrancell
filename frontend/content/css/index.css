@@ -218,4 +218,50 @@ body {
     font-size: 1.3rem;
 }
 
+.recommend-packet{
+    background-color: var(--white-50);
+    border-radius: 20px;
+    margin-top: 25px;
+    padding: 30px;
+}
+
+.recommend-packet-title{
+    font-size: 1.3rem;
+}
+
+.recommend-packets-table{
+    margin-top: 20px;
+    width: 100%;
+    color: var(--grey-650);
+    outline: none;
+    border-radius: 10px;
+}
+
+.recommend-packets-table tr{
+    text-align: center;
+}
+
+.recommend-packets-table tr:not(:first-child){
+    border-top: 3px solid var(--white-200);
+}
+
+.recommend-packets-table th{
+    padding: 20px;
+}
+
+.recommend-packets-table td{
+    padding: 20px;
+}
+
+.recommend-packets-table .buy-packet-btn{
+    background-color: var(--gold-400);
+    font-size: 1rem;
+    padding: 5px 30px;
+    border-radius: 10px;
+    color: var(--white-50);
+    box-shadow: 0 0 10px var(--gold-400);
+    outline: none;
+    border: none;
+    cursor: pointer;
+} 
 /* Finish Section Start */
