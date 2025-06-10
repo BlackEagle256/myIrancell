@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="icon" href="https://irancell.ir/wp-content/uploads/2022/03/Irancell-Logo180-2-150x150.png" sizes="32x32">
     <link rel="stylesheet" href="./content/css/index.css">
-    <title>myIrancell</title>
+    <title>خریدهای من</title>
 </head>
 
 <body>
-
-    <!-- Start Left Side -->
     <div class="left-side lalezar-font">
         <!-- Profile Box -->
         <div class="profile-box flex align-items-center">
@@ -67,85 +65,58 @@
             <!-- Finish Active Services -->
 
             <div class="download-app-box flex align-items-center justify-content-between">
-                <img src="content/img/my-irancell.svg" alt="myIrancell-app">
+                <img src="https://irancell.ir/wp-content/uploads/2023/01/My-Irancell-FA.svg" alt="myIrancell-app">
                 <h1>اپلیکیشن ما رو دانلود کن!</h1>
             </div>
         </div>
 
         <!-- Finish Sim Card Charge -->
     </div>
-    <!-- Finish Left Side -->
 
-    <!-- -------------------------- -->
-
-    <!-- Start Center Side -->
     <main class="main">
-        <h1 class="main-title lalezar-font">صفحه اصلی</h1>
+        <!-- <h1 class="main-title lalezar-font">خریدهای من</h1> -->
 
         <section class="main-overlay flex flex-column">
             <h1 class="lalezar-font">این همه بسته بی سابقس</h1>
             <button>اینجا چخبره؟</button>
         </section>
 
-        <section class="chart">
-            <h1 class="lalezar-font">نمودار میزان مصرف کل</h1>
-            <canvas id="myChart" height="100">
-                Your Browser Does Not Support Canvas Element
-            </canvas>
-        </section>
-
         <section class="recommend-packet">
-            <h1 class="recommend-packet-title">بسته های پیشنهادی مخصوص شما</h1>
+            <h1 class="recommend-packet-title lalezar-font">خریدهای من</h1>
 
             <table class="recommend-packets-table">
                 <tr class="vazir-fb">
+                    <th>تاریخ خرید بسته</th>
                     <th>تاریخ انقضای بسته</th>
                     <th>نام بسته</th>
-                    <th>تخفیف</th>
                     <th>قیمت</th>
                 </tr>
 
                 <tr>
                     <td>۱۴ شهریور ۱۴۰۴</td>
-                    <td>بسته اینترنت ۳ ماهه</td>
-                    <td>۲۰%</td>
-                    <td>۱۳۰,۰۰۰</td>
-                    <td><button class="buy-packet-btn lalezar-font">
-                            خرید
-                        </button></td>
+                    <td>۱۴ شهریور ۱۴۰۵</td>
+                    <td>بسته اینترنت یک ساله</td>
+                    <td>۱۴۰,۰۰۰</td>
                 </tr>
-
                 <tr>
-                    <td>بسته ترکیبی هفتگی</td>
-                    <td>بسته ترکیبی هفتگی</td>
-                    <td>۴۵%</td>
+                    <td>۱۴ شهریور ۱۴۰۴</td>
+                    <td>۱۴ شهریور ۱۴۰۵</td>
+                    <td>بسته پیامک یک ساله</td>
                     <td>۱۳۰,۰۰۰</td>
-                    <td><button class="buy-packet-btn lalezar-font">
-                            خرید
-                        </button></td>
                 </tr>
-
                 <tr>
-                    <td>۱۵ تیر ۱۴۰۴</td>
-                    <td>بسته مکالمه ۱ ماهه</td>
-                    <td>۱۰%</td>
-                    <td>۳۲,۰۰۰</td>
-                    <td><button class="buy-packet-btn lalezar-font">
-                            خرید
-                        </button></td>
+                    <td>۱۴ شهریور ۱۴۰۴</td>
+                    <td>۱۴ شهریور ۱۴۰۵</td>
+                    <td>بسته مکالمه یک ساله</td>
+                    <td>۱۵۰,۰۰۰</td>
                 </tr>
             </table>
         </section>
     </main>
-    <!-- Finish Center Side -->
-
-    <!-- Start Right Side -->
-
-    <!-- Finish Right Side -->
 
     <div class="sidebar flex align-items-center flex-column">
         <h1 class="sidebar-brand flex align-items-center">
-            <img src="content/img/my-irancell.svg" alt="LogoImg"
+            <img src="https://irancell.ir/wp-content/themes/mtn_personal/assets/images/my-irancell-fa.svg" alt="LogoImg"
                 width="60px">
             <span class="lalezar-font">ایرانسل من</span>
         </h1>
@@ -158,7 +129,7 @@
         </div>
 
         <ul class="sidebar-menu">
-            <li class="sidebar-menu-item flex align-item-center active">
+            <li class="sidebar-menu-item flex align-item-center">
                 <span>
                     <i class="fa-solid fa-house"></i>
                 </span>
@@ -166,7 +137,7 @@
             </li>
             <li class="sidebar-menu-item-breaker">سرویس ها</li>
 
-            <li class="sidebar-menu-item flex align-item-center">
+            <li class="sidebar-menu-item flex align-item-center active">
                 <span>
                     <i class="fa-solid fa-chart-pie"></i>
                 </span>
@@ -218,10 +189,6 @@
             </li>
         </ul>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-    <script src="content/js/index.js" type="module"></script>
 </body>
 
 </html>
