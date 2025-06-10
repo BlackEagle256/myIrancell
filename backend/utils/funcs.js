@@ -1,16 +1,18 @@
 const mysql = require('mysql');
 const myIrancellDB = require('../db/myIrancellDB');
 
-const getUserIdFromUserToken = userToken => {
-    let getMainUserID = `SELECT id FROM users WHERE token=${userToken}`
+const getUserIdFromUserToken = userToken => {    
+    let getMainUserIDQuery = `SELECT id FROM users WHERE token=${JSON.stringify(userToken)}`;
 
-    myIrancellDB.query(getMainUserID, (result, err) => {
-        if (err) {
-            console.log(err);
-            return false;
-        }
-        return result
+    return new Promise((resolve, reject) => {
+        myIrancellDB.query(getMainUserIDQuery, (error, result) => {
+            if (error) {
+                console.log(error);
+                return false;
+            }
+            resolve(result);
+        })
     })
 }
 
-module.exports(getUserIdFromUserToken);
+module.exports = getUserIdFromUserToken
