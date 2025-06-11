@@ -37,28 +37,27 @@ app.get('/api/recommend-packs', (req, res) => {
     let userID = null;
     getUserIdFromUserToken(userToken).then((result) => {
         userID = result[0].id;
-    })
-    let getRecommendPacksQuery = `SELECT * FROM recommend_packet WHERE userID=${userID}`;
-
-    // myIrancellDB.query(getRecommendPacksQuery, (err, result) => {
-    //     if (err)
-    //         res.send(null)
-    //     else
-    //         res.send(result)
-    // })
-})
+        let getRecommendPacksQuery = `SELECT * FROM recommend_packet WHERE userID=${userID}`;
+        myIrancellDB.query(getRecommendPacksQuery, (err, result) => {
+            if (err)
+                res.send(null)
+            else
+                res.send(result)
+        });
+    });
+});
 
 app.get('/api/userBuy', (req, res) => {
     let userToken = req.headers.authorization;
-    let userID = getUserIdFromUserToken(userToken);
+    getUserIdFromUserToken(userToken).then(result => {
+        let getUserBuyInfo = `SELECT * FROM sales WHERE userID=${result[0].id}`;
 
-    let getUserBuyInfo = `SELECT * FROM sales WHERE userID=${userID}`;
-
-    myIrancellDB.query(getUserBuyInfo, (err, result) => {
-        if (err)
-            res.send(null);
-        else
-            res.send(result);
+        myIrancellDB.query(getUserBuyInfo, (err, result) => {
+            if (err)
+                res.send(null);
+            else
+                res.send(result);
+        })
     })
 })
 
