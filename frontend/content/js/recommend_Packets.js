@@ -1,25 +1,33 @@
 window.addEventListener('load', () => {
-    const servicesTitle = $.querySelector('.service-title');
+    const recommendPacketsTable = document.querySelector('.recommend-packets-table');
+    const recommendPacketsTableBody = recommendPacketsTable.querySelector('tbody');
 
-    fetch(`http://localhost:3000/api/services/1`)
-        .then((res) => res.json())
-        .then((services) => {
-            console.log(services)
-            services.forEach(service => {
-                servicesTitle.insertAdjacentHTML('afterend',
-                    `
-                    <div class="active-service-box flex align-items-center vazir-fb">
-                <span class="active-sevice-icon flex align-items-center justify-content-center">
-                    <i class="${service.icon}"></i>
-                </span>
+    const mainUrlApi = 'http://localhost:3000/api';
 
-                <div class="active-service-box-desc">
-                    <h4>"${service.title}"</h4>
-                    <h6>"${service.max_date}"</h6>
-                </div>
-            </div>
-            `
-                )
+    let userToken = localStorage.getItem('user-token');
+
+    fetch(`${mainUrlApi}/recommend-packs`, {
+        headers: {
+            authorization: userToken
+        }
+    })
+        .then(res => res.json())
+        .then(packets => {
+            console.log("packets", packets)
+            packets.forEach(packet => {
+                recommendPacketsTable.insertAdjacentHTML('beforeend', `
+                    <tr>
+                    <td>${packet.max_date}</td>
+                    <td>${packet.title}</td>
+                    <td>${packet.off}%</td>
+                    <td>${packet.price} تومان</td>
+                    <td><button class="buy-packet-btn lalezar-font">
+                        خرید
+                    </button></td>
+                </tr>
+                `)
             });
-        })
+        }
+        )
+
 })
