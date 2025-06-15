@@ -22,7 +22,7 @@ app.get('/api/users', (req, res) => {
 
 app.get('/api/services/:isActive', (req, res) => {
     let isActive = req.params.isActive;
-    let getServicesQuery = `SELECT * FROM services WHERE isActive=${isActive}`
+    let getServicesQuery = `SELECT * FROM services WHERE isActive='${isActive}'`
 
     myIrancellDB.query(getServicesQuery, (err, result) => {
         if (err)
