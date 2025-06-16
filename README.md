@@ -46,7 +46,7 @@ cd myIrancell
 
 2. Install required packages:
 ```bash
-cd ../backend
+cd backend
 npm install
 ```
 
