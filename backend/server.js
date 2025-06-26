@@ -10,15 +10,15 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post("/api/register", (req, res) => {
-  const { firstName, lastName, profile, phone, charge, token } = req.body;
+  const { email, password, profile, phone, charge, token } = req.body;
 
   const RegisterUserQuery = `
     INSERT INTO users 
-    VALUES (NULL, "${firstName}", "${lastName}", "${profile}", "${phone}", ${charge}, "${token}")
+    VALUES (NULL, "${email}", "${password}", NULL, NULL, NULL, NULL,NULL ,NULL)
   `;
   myIrancellDB.query(
     RegisterUserQuery,
-    [firstName, lastName, profile, phone, charge, token],
+    [email, password, profile, phone, charge, token],
     (error, result) => {
       if (error) {
         console.log("error", error);
