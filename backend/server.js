@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const jsonwebtoken = require("jsonwebtoken")
 
 const myIrancellDB = require("./db/myIrancellDB");
 const getUserIdFromUserToken = require("./utils/funcs");
 
 const app = express();
+const secretKey = "SecretKeyForMyIrancellProject";
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -34,20 +36,28 @@ app.post("/api/signup", (req, res) => {
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
-  const RegisterUserQuery =
+  const loginUserQuery =
     `SELECT * FROM users WHERE email = "${email}" AND password = "${password}";`
   myIrancellDB.query(
-    RegisterUserQuery,
+    loginUserQuery,
     (error, result) => {
       if (error) {
         console.log("error", error);
-        return res.send(error);
+        return res.status(500).send({ success: false, message: "Database error" }); // کد 500 برای خطای سرور
       }
       if (result.length === 0) {
         return res.status(401).json({ success: false, message: "Invalid email or password" });
       }
 
       const user = result[0];
+      const payload = {
+        userId: user.id,
+        username: user.email,
+        role: "user"
+      }
+
+      const token = jsonwebtoken.sign(payload, secretKey, { expiresIn: '1h' });
+      console.log("Generated Token:", token);
 
       res.json({
         success: true,
@@ -58,8 +68,8 @@ app.post("/api/login", (req, res) => {
           phone: user.phone,
           charge: user.charge,
           profile: user.profile,
-          token: user.token,
-        }
+        },
+        token: token
       });
     }
   );

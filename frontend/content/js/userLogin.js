@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 console.log(data);
                 if (data.success) {
-                    localStorage.setItem('user-token', data.user.token);
+                    localStorage.setItem('user-token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
 
-                    window.location.href = "index.html";
+                    // window.location.href = "index.html";
                 } else {
                     alert('ایمیل یا رمز عبور اشتباه است');
                 }
