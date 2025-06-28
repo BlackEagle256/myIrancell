@@ -9,12 +9,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/api/register", (req, res) => {
-  const { email, password, profile, phone, charge, token } = req.body;
+app.post("/api/signup", (req, res) => {
+  const { firstname, lastname, email, password, profile, phone, charge, token } = req.body;
 
   const RegisterUserQuery = `
     INSERT INTO users 
-    VALUES (NULL, "${email}", "${password}", NULL, NULL, NULL, NULL,NULL ,NULL)
+    VALUES (NULL, "${email}", "${password}", "${firstname}", "${lastname}", "${profile}","${phone}" ,"${charge}", NULL)
   `;
   myIrancellDB.query(
     RegisterUserQuery,
@@ -25,8 +25,42 @@ app.post("/api/register", (req, res) => {
         res.send(null);
       } else {
         console.log(result);
-        res.send(true);
+        res.send(result);
       }
+    }
+  );
+});
+
+app.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  const RegisterUserQuery =
+    `SELECT * FROM users WHERE email = "${email}" AND password = "${password}";`
+  myIrancellDB.query(
+    RegisterUserQuery,
+    (error, result) => {
+      if (error) {
+        console.log("error", error);
+        return res.send(error);
+      }
+      if (result.length === 0) {
+        return res.status(401).json({ success: false, message: "Invalid email or password" });
+      }
+
+      const user = result[0];
+
+      res.json({
+        success: true,
+        user: {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          phone: user.phone,
+          charge: user.charge,
+          profile: user.profile,
+          token: user.token,
+        }
+      });
     }
   );
 });
