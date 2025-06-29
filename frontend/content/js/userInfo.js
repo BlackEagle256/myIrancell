@@ -10,9 +10,12 @@ window.addEventListener('load', () => {
 
     let userToken = localStorage.getItem('user-token');
 
+    console.log(userToken);
+
+
     fetch(`${mainUrlApi}/users`, {
         headers: {
-            authorization: userToken
+            authorization: 'Bearer ' + userToken
         }
     })
         .then(res => res.json())

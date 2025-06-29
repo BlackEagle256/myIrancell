@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
     fetch(`${mainUrlApi}/recommend-packs`, {
         headers: {
-            authorization: userToken
+            authorization: 'Bearer ' + userToken
         }
     })
         .then(res => res.json())
