@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const jsonwebtoken = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 
 const myIrancellDB = require("./db/myIrancellDB");
 const getUserIdFromUserToken = require("./utils/funcs");
@@ -10,6 +10,27 @@ const app = express();
 const secretKey = "SecretKeyForMyIrancellProject";
 app.use(bodyParser.json());
 app.use(cors());
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Access Token Missing"
+    })
+  }
+
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) {
+      return res.status(403).json({
+        message: "Invalid Token"
+      })
+    }
+    req.user = user;
+    next();
+  })
+}
 
 app.post("/api/signup", (req, res) => {
   const { firstname, lastname, email, password, profile, phone, charge, token } = req.body;
@@ -56,7 +77,7 @@ app.post("/api/login", (req, res) => {
         role: "user"
       }
 
-      const token = jsonwebtoken.sign(payload, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
       console.log("Generated Token:", token);
 
       res.json({
@@ -75,14 +96,14 @@ app.post("/api/login", (req, res) => {
   );
 });
 
-app.get("/api/users", (req, res) => {
-  let userToken = req.headers.authorization;
+app.get("/api/users", authenticateToken, (req, res) => {
+  const userId = req.user.userId;
 
-  let getMainUserQuery = `SELECT * FROM users WHERE token="${userToken}"`;
+  const getMainUserQuery = `SELECT * FROM users WHERE id = ${userId}`;
 
   myIrancellDB.query(getMainUserQuery, (err, result) => {
-    if (err) res.send(null);
-    else res.send(result);
+    if (err) return res.sendStatus(500);
+    res.send(result);
   });
 });
 
@@ -96,28 +117,22 @@ app.get("/api/services/:isActive", (req, res) => {
   });
 });
 
-app.get("/api/recommend-packs", (req, res) => {
-  let userToken = req.headers.authorization;
-  let userID = null;
-  getUserIdFromUserToken(userToken).then((result) => {
-    userID = result[0].id;
-    let getRecommendPacksQuery = `SELECT * FROM recommend_packet WHERE userID=${userID}`;
-    myIrancellDB.query(getRecommendPacksQuery, (err, result) => {
-      if (err) res.send(null);
-      else res.send(result);
-    });
+app.get("/api/recommend-packs", authenticateToken, (req, res) => {
+  const userID = req.user.userId;
+  let getRecommendPacksQuery = `SELECT * FROM recommend_packet WHERE userID=${userID}`;
+  myIrancellDB.query(getRecommendPacksQuery, (err, result) => {
+    if (err) res.send(null);
+    else res.send(result);
   });
 });
 
-app.get("/api/userBuy", (req, res) => {
-  let userToken = req.headers.authorization;
-  getUserIdFromUserToken(userToken).then((result) => {
-    let getUserBuyInfo = `SELECT * FROM sales WHERE userID=${result[0].id}`;
+app.get("/api/userBuy", authenticateToken, (req, res) => {
+  const userID = req.user.userId;
+  let getUserBuyInfo = `SELECT * FROM sales WHERE userID=${userID}`;
 
-    myIrancellDB.query(getUserBuyInfo, (err, result) => {
-      if (err) res.send(null);
-      else res.send(result);
-    });
+  myIrancellDB.query(getUserBuyInfo, (err, result) => {
+    if (err) res.send(null);
+    else res.send(result);
   });
 });
 
