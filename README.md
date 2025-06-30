@@ -9,6 +9,8 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - [Running the Server](#running-the-server)
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
+- [Authentication System](#authentication-system)
+- [Frontend Structure](#frontend-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -19,7 +21,9 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - List of recommended packages
 - Purchase history
 - Beautiful responsive UI
-- Token-based authentication system
+- Secure token-based authentication system
+- User login and registration
+- Password hashing for security
 
 ## Technologies Used
 
@@ -29,16 +33,18 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - JavaScript (ES6+)
 - Chart.js for data visualization
 - Font Awesome for icons
+- Fetch API for backend communication
+- LocalStorage for token management
 
 ### Backend
 - Node.js
 - Express.js
 - MySQL
-- CORS
-- jsonwebtoken
-- body-parser
-- bcrypt
-- jsonwebtoken
+- CORS middleware
+- jsonwebtoken for authentication
+- body-parser for request handling
+- bcrypt for password hashing
+- JWT for secure authentication
 
 ## Installation
 
@@ -86,6 +92,7 @@ myIrancell/
 │   │   └── js/             # JavaScript files
 │   ├── index.html          # Main page
 │   ├── packets.html        # My Purchases page
+│   ├── login.html          # Login/Signup page
 ├── backend/                # Backend files
 │   ├── db/                 # Database config
 │   ├── utils/              # Helper functions
@@ -97,18 +104,59 @@ myIrancell/
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/users` | GET | Get user information |
-| `/api/services/:isActive` | GET | Get active/inactive services |
-| `/api/recommend-packs` | GET | Get recommended packages |
-| `/api/userBuy` | GET | Get user purchase history |
+| Endpoint | Method | Description | Authentication |
+|----------|--------|-------------|----------------|
+| `/api/signup` | POST | Register new user | No |
+| `/api/login` | POST | User login | No |
+| `/api/users` | GET | Get user information | Yes |
+| `/api/services/:isActive` | GET | Get active/inactive services | No |
+| `/api/recommend-packs` | GET | Get recommended packages | Yes |
+| `/api/userBuy` | GET | Get user purchase history | Yes |
 
+## Authentication System
+
+The project uses JWT (JSON Web Tokens) for secure authentication:
+
+1. **Registration**:
+   - Passwords are securely hashed using bcrypt before storage
+   - Users provide email, password, and personal details
+
+2. **Login**:
+   - Email/password authentication
+   - Returns JWT token for subsequent authenticated requests
+   - Tokens expire after 1 hour
+
+3. **Protected Routes**:
+   - Require valid JWT in Authorization header
+   - Token format: `Bearer <token>`
+
+## Frontend Structure
+
+### Login/Signup Page (`login.html`)
+- Responsive design with gradient overlay
+- Tab system for login/signup forms
+- Form validation
+- Secure password handling
+- Token storage in localStorage
+
+### Main Features:
+- Toggle between login and signup forms
+- Error handling for failed authentication
+- Redirect to main page on successful login
+- LocalStorage management for user session
 
 ## Contributing
 
 Contributions, bug reports, and feature requests are always welcome! Please create an Issue before submitting a PR.
 
+When contributing:
+- Follow existing code style
+- Include tests for new features
+- Update documentation accordingly
+- Ensure backward compatibility
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+---
