@@ -6,6 +6,7 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
+- [Database Setup](#database-setup)
 - [Running the Server](#running-the-server)
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
@@ -60,10 +61,28 @@ cd backend
 npm install
 ```
 
-3. Set up MySQL database:
-- Configure `myIrancellDB.js` in `backend/db/` with your database credentials
-- Create a database named `myIrancell`
-- Execute the required tables from `backend/db/schema.sql`
+## Database Setup
+
+### Automatic Setup (Recommended)
+1. Configure your MySQL credentials in `backend/db/myIrancellDB.js`
+2. Run the setup script:
+```bash
+node db/setup.js
+```
+
+This will automatically:
+- Create the `myirancell` database
+- Create all required tables
+- Insert sample data
+- Set up foreign key relationships
+
+### Manual Setup
+1. Create database manually:
+```sql
+CREATE DATABASE myirancell CHARACTER SET utf8 COLLATE utf8_persian_ci;
+```
+
+2. Import the SQL file through phpMyAdmin or MySQL Workbench
 
 ## Running the Server
 
@@ -95,6 +114,9 @@ myIrancell/
 │   ├── login.html          # Login/Signup page
 ├── backend/                # Backend files
 │   ├── db/                 # Database config
+│   │   ├── database.sql    # Database schema and data
+│   │   ├── myIrancellDB.js # DB connection config
+│   │   └── setup.js        # DB setup script
 │   ├── utils/              # Helper functions
 │   ├── server.js           # Main server file
 │   └── package.json        # Backend packages
@@ -158,5 +180,3 @@ When contributing:
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
----
