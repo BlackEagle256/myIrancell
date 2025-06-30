@@ -35,6 +35,8 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - Express.js
 - MySQL
 - CORS
+- jsonwebtoken
+- body-parser
 
 ## Installation
 
