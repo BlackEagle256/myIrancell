@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const myIrancellDB = require("./db/myIrancellDB");
-const getUserIdFromUserToken = require("./utils/funcs");
 
 const app = express();
 const secretKey = "SecretKeyForMyIrancellProject";
+const saltRound = 10;
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -32,12 +34,14 @@ function authenticateToken(req, res, next) {
   })
 }
 
-app.post("/api/signup", (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const { firstname, lastname, email, password, profile, phone, charge, token } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, saltRound)
 
   const RegisterUserQuery = `
     INSERT INTO users 
-    VALUES (NULL, "${email}", "${password}", "${firstname}", "${lastname}", "${profile}","${phone}" ,"${charge}", NULL)
+    VALUES (NULL, "${firstname}", "${lastname}", "${email}", "${hashedPassword}", "${profile}","${phone}" ,"${charge}")
   `;
   myIrancellDB.query(
     RegisterUserQuery,
@@ -58,10 +62,9 @@ app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
   const loginUserQuery =
-    `SELECT * FROM users WHERE email = "${email}" AND password = "${password}";`
+    `SELECT * FROM users WHERE email = "${email}";`
   myIrancellDB.query(
-    loginUserQuery,
-    (error, result) => {
+    loginUserQuery, async (error, result) => {
       if (error) {
         console.log("error", error);
         return res.status(500).send({ success: false, message: "Database error" }); // کد 500 برای خطای سرور
@@ -71,6 +74,16 @@ app.post("/api/login", (req, res) => {
       }
 
       const user = result[0];
+
+      const validPassword = await bcrypt.compare(password, user.password);
+
+      if (!validPassword) {
+        return res.sendStatus(401).json({
+          success: "false",
+          message: "Invalid Username or Password"
+        })
+      }
+
       const payload = {
         userId: user.id,
         username: user.email,
