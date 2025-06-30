@@ -37,6 +37,8 @@ A beautiful user panel for Irancell SIM cards with features to view user informa
 - CORS
 - jsonwebtoken
 - body-parser
+- bcrypt
+- jsonwebtoken
 
 ## Installation
 
