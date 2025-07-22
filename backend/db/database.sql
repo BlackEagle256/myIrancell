@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `myirancell` CHARACTER SET utf8 COLLATE utf8_persian_ci;
-USE `myirancell`;
+CREATE DATABASE IF NOT EXISTS `myIrancell` CHARACTER SET utf8 COLLATE utf8_persian_ci;
+USE `myIrancell`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
